@@ -1,0 +1,9 @@
+for num in {10  GNU nano 4.8                                                                                                                      script.sh                                                                                                                       Modified  
+for num in {10..49}
+do
+        convert $num.gif -resize 38x32 -background black -alpha remove -alpha off $num.32px.gif
+done
+..49}
+do
+	convert $num.gif -resize 38x32 -background black -alpha remove -alpha off $num.32px.gif
+done
