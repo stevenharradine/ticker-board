@@ -1,8 +1,11 @@
 const { exec } = require('child_process');
 const fs = require("fs");
 const http = require("http");
-const host = '0.0.0.0';
-const port = 8000;
+
+const settings = JSON.parse(fs.readFileSync('settings.json'))
+
+const host = settings['webserver-host-binding'];
+const port = settings['webserver-port'];
 
 const requestListener = function (req, res) {
 	var buffer = ""

@@ -1,0 +1,8 @@
+{
+  "ticker-time-step-ms": 10,
+  "led-cols": 64,
+  "led-gpio-mapping": "adafruit-hat",
+  "led-chain": 7,
+  "webserver-host-binding": "0.0.0.0",
+  "webserver-port": 8000
+}
