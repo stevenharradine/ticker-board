@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { exec } = require('child_process');
 const fs = require("fs");
 const http = require("http");
 const host = '0.0.0.0';
@@ -64,18 +64,22 @@ const requestListener = function (req, res) {
 function restart_ticker (tickerType) {
 	try {
 		console.log ("starting " + tickerType + " ticker . ")
-		const child = execSync("bash restart-ticker.sh " + tickerType);
-/*		const child = exec("bash restart-ticker.sh " + tickerType, (err, stdout, stderr) => {
-			if (err) {
-				console.error(err);
+		const child = exec("bash restart-ticker.sh " + tickerType, (error, stdout, stderr) => {
+			if (error) {
+				console.log("error: "+ error.message);
 				return;
 			}
 
-			console.log(stdout);
-		})*/
+			if (stderr) {
+				console.log("stderr: " + stderr);
+				return;
+			}
+
+			console.log("stdout:\n" + stdout);
+
+		})
 
 		console.log ("done")
-
 		return {"returnCode": 200, "buffer": "ok" }
 	} catch (error) {
 		return {"returnCode": 503, "buffer": "error" }
