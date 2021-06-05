@@ -12,10 +12,10 @@ relative_change=`echo "$cache" | grep "price-section__relative-value" | grep -o 
 echo "$price * $cad2usd" | bc | xargs printf "$%'.2f "
 
 if [ "`echo \"$absolute_change > 0\" | bc`" = "1" ] || [ "`echo \"$relative_change > 0\" | bc`" = "1" ]; then
-	echo -n "·"
+	echo -n "<color:green>"
 fi
 if [ "`echo \"$absolute_change < 0\" | bc`" = "1" ] || [ "`echo \"$relative_change < 0\" | bc`" = "1" ]; then
-	echo -n "¸"
+	echo -n "<color:red>"
 fi
 
-printf "%'.2f (%.2f%%)¶    " $absolute_change $relative_change
+printf "%'.2f (%.2f%%)<color:white>    " $absolute_change $relative_change

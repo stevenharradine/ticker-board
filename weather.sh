@@ -39,7 +39,7 @@ forecastIconCodesTwo=`echo "$forecastIconCodesSegments" | cut -d',' -f2 | grep -
 forecastIconCodesThree=`echo "$forecastIconCodesSegments" | cut -d',' -f3 | grep -o "[0-9]*"`
 
 echo -n $location"    "
-echo -n Now "<"images/weather/$size/$iconCode.gif">" $condition $tempature°C"    "
-echo -n $forecastPeriodsOne "<"images/weather/$size/$forecastIconCodesOne.gif">" $forecastConditionsOne $forecastHighsOne$forecastLowsOne°C"    "
-echo -n $forecastPeriodsTwo "<"images/weather/$size/$forecastIconCodesTwo.gif">" $forecastConditionsTwo $forecastHighsTwo$forecastLowsTwo°C"    "
-echo -n $forecastPeriodsThree "<"images/weather/$size/$forecastIconCodesThree.gif">" $forecastConditionsThree $forecastHighsThree$forecastLowsThree°C"    "
+echo -n Now "<image:"images/weather/$size/$iconCode.gif">" $condition $tempature°C"    "
+echo -n $forecastPeriodsOne "<image:"images/weather/$size/$forecastIconCodesOne.gif">" $forecastConditionsOne $forecastHighsOne$forecastLowsOne°C"    "
+echo -n $forecastPeriodsTwo "<image:"images/weather/$size/$forecastIconCodesTwo.gif">" $forecastConditionsTwo $forecastHighsTwo$forecastLowsTwo°C"    "
+echo -n $forecastPeriodsThree "<image:"images/weather/$size/$forecastIconCodesThree.gif">" $forecastConditionsThree $forecastHighsThree$forecastLowsThree°C"    "

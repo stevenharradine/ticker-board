@@ -10,11 +10,11 @@ percent=`echo "($change / $price) * 100" | bc -l | xargs printf "%.2f"`
 echo "$price * $cad2usd" | bc | xargs printf "$%'.2f "
 
 if [ "`echo \"$change > 0\" | bc`" = "1" ] && [ "`echo \"$percent > 0\" | bc`" = "1" ]; then
-	echo -n "·"
+	echo -n "<color:green>"
 fi
 if [ "`echo \"$change < 0\" | bc`" = "1" ] && [ "`echo \"$percent < 0\" | bc`" = "1" ]; then
-	echo -n "¸"
+	echo -n "<color:red>"
 fi
 
 echo "$change * $cad2usd" | bc | xargs printf "$%'.2f "
-echo "($percent%)¶    "
+echo "($percent%)<color:white>    "

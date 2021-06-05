@@ -2,29 +2,22 @@ text=$1
 font="Sans-Serif"
 size="32px"
 color="white"
-directWriteMode="false"
+isExecuteSpecialCommandMode="false"
+executeSpecialCommandRaw=""
 
 for (( i=0; i<${#text}; i++ )); do
 	char="${text:$i:1}"
 
 	if [ "$char" = "<" ]; then
-		directWriteMode="true"
+		isExecuteSpecialCommandMode="true"
+		executeSpecialCommandRaw=""
 		mappedChar=" "
 	elif [ "$char" = ">" ]; then
 		mappedChar=" "
-	elif [ "$char" = "¶" ]; then
-		color="white"
-		mappedChar="null"
-	elif [ "$char" = "·" ]; then
-		color="green"
-		mappedChar="null"
-	elif [ "$char" = "¸" ]; then
-		color="red"
-		mappedChar="null"
 	else
 		mappedChar="$char"
 
-		if [ "$directWriteMode" = "false" ]; then
+		if [ "$isExecuteSpecialCommandMode" = "false" ]; then
 			mappedChar=${mappedChar^^}
 
 			if [ "$char" = " " ]; then
@@ -53,8 +46,8 @@ for (( i=0; i<${#text}; i++ )); do
 		fi
 	fi
 
-	if [ "$directWriteMode" = "true" ]; then
-		paths="$paths$mappedChar"
+	if [ "$isExecuteSpecialCommandMode" = "true" ]; then
+		executeSpecialCommandRaw="$executeSpecialCommandRaw$mappedChar"
 	else
 		if [ "$mappedChar" != "null" ]; then
 			paths="$paths images/fonts/$font/$color/$size/$mappedChar.gif"
@@ -62,7 +55,16 @@ for (( i=0; i<${#text}; i++ )); do
 	fi
 
 	if [ "$char" = ">" ]; then
-		directWriteMode="false"
+		isExecuteSpecialCommandMode="false"
+
+		executeSpecialCommandAction=`echo $executeSpecialCommandRaw | cut -d':' -f1`
+		executeSpecialCommandArgument=`echo $executeSpecialCommandRaw | cut -d':' -f2`
+
+		if [ "$executeSpecialCommandAction" = "image" ]; then
+			paths="$paths $executeSpecialCommandArgument"
+		elif [ "$executeSpecialCommandAction" = "color" ]; then
+			color=$executeSpecialCommandArgument
+		fi
 	fi
 done
 

@@ -15,9 +15,9 @@ fi
 
 printf "%'.2f " $price
 if [ "`echo \"$change > 0\" | bc`" = "1" ] || [ "`echo \"$percent > 0\" | bc`" = "1" ]; then
-	echo -n "·"
+	echo -n "<color:green>"
 fi
 if [ "`echo \"$change < 0\" | bc`" = "1" ] || [ "`echo \"$percent < 0\" | bc`" = "1" ]; then
-	echo -n "¸"
+	echo -n "<color:red>"
 fi
-printf "%.2f (%.2f%%)¶    " $change $percent
+printf "%.2f (%.2f%%)<color:white>    " $change $percent
