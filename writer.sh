@@ -69,4 +69,4 @@ for (( i=0; i<${#text}; i++ )); do
 done
 
 convert $paths +append ticker.ppm
-convert ticker.ppm ticker.jpeg
+convert ticker.ppm webserver/images/ticker.jpeg
