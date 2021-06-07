@@ -67,9 +67,11 @@ const requestListener = function (req, res) {
 function restart_ticker (tickerType) {
 	// whitelist input into exec function
 	approvedTickerTypes = [ "news", "finance", "weather" ]
-	if (arr.indexOf(str) < 0) {
-		return;
-	}
+	if (approvedTickerTypes.indexOf(tickerType) < 0) {
+		console.log ("error: unregistered 'tickerType'")
+		return {"returnCode": 504, "buffer": "error: unregistered 'tickerType'" }
+    }
+
 
 	// restart the ticker
 	try {
@@ -77,12 +79,12 @@ function restart_ticker (tickerType) {
 		const child = exec("bash restart-ticker.sh " + tickerType, (error, stdout, stderr) => {
 			if (error) {
 				console.log("error: "+ error.message);
-				return;
+				return
 			}
 
 			if (stderr) {
 				console.log("stderr: " + stderr);
-				return;
+				return
 			}
 
 			console.log("stdout:\n" + stdout);
