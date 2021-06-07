@@ -64,6 +64,8 @@ for (( i=0; i<${#text}; i++ )); do
 			paths="$paths $executeSpecialCommandArgument"
 		elif [ "$executeSpecialCommandAction" = "color" ]; then
 			color=$executeSpecialCommandArgument
+		elif [ "$executeSpecialCommandAction" = "size" ]; then
+			size=$executeSpecialCommandArgument
 		fi
 	fi
 done
