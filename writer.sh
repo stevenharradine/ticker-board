@@ -70,4 +70,3 @@ done
 
 convert $paths +append ticker.ppm
 convert ticker.ppm ticker.jpeg
-

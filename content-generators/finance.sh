@@ -1,7 +1,7 @@
 size="32px"
 
 echo -n "USD/CAD "
-cache=`bash scripts/market-scraper.sh currency usdcad`
+cache=`bash content-generators/finance/scrapers/market.sh currency usdcad`
 cad2usd=`echo "$cache" | cut -d" " -f1`
 echo -n "$cache"
 
@@ -24,31 +24,31 @@ fi
 echo -n "($tsx_percent%)<color:white>    "
 
 echo -n "DJIA "
-source scripts/market-scraper.sh index djia
+source content-generators/finance/scrapers/market.sh index djia
 
 echo -n "NASDAQ "
-source scripts/market-scraper.sh index comp
+source content-generators/finance/scrapers/market.sh index comp
 
 echo -n "Oil "
-source scripts/market-scraper.sh future "crude%20oil%20-%20electronic"
+source content-generators/finance/scrapers/market.sh future "crude%20oil%20-%20electronic"
 
 echo -n "Gold <image:images/finance/$size/gold.gif> "
-source scripts/metal-scraper.sh AU
+source content-generators/finance/scrapers/metal.sh AU
 
 echo -n "Silver <image:images/finance/$size/silver.gif> "
-source scripts/metal-scraper.sh AG
+source content-generators/finance/scrapers/metal.sh AG
 
 echo -n "Platinum <image:images/finance/$size/platinum.gif> "
-source scripts/metal-scraper.sh PT
+source content-generators/finance/scrapers/metal.sh PT
 
 echo -n "BTC <image:images/finance/$size/btc.gif> "
-source scripts/crypto-scraper.sh btc-usd
+source content-generators/finance/scrapers/crypto.sh btc-usd
 
 echo -n "ETH <image:images/finance/$size/eth.gif> "
-source scripts/crypto-scraper.sh eth-usd
+source content-generators/finance/scrapers/crypto.sh eth-usd
 
 echo -n "XLM <image:images/finance/$size/xlm.gif> "
-source scripts/crypto-scraper.sh xlm-usd
+source content-generators/finance/scrapers/crypto.sh xlm-usd
 
 echo -n "XRP <image:images/finance/$size/xrp.gif> "
-source scripts/crypto-scraper.sh xrp-usd
+source content-generators/finance/scrapers/crypto.sh xrp-usd

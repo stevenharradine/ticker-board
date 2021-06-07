@@ -65,6 +65,13 @@ const requestListener = function (req, res) {
 };
 
 function restart_ticker (tickerType) {
+	// whitelist input into exec function
+	approvedTickerTypes = [ "news", "finance", "weather" ]
+	if (arr.indexOf(str) < 0) {
+		return;
+	}
+
+	// restart the ticker
 	try {
 		console.log ("starting " + tickerType + " ticker . ")
 		const child = exec("bash restart-ticker.sh " + tickerType, (error, stdout, stderr) => {
