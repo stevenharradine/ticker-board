@@ -4,6 +4,8 @@ size="32px"
 color="white"
 isExecuteSpecialCommandMode="false"
 executeSpecialCommandRaw=""
+rowCounter=0
+imageCounter=0
 
 for (( i=0; i<${#text}; i++ )); do
 	char="${text:$i:1}"
@@ -66,9 +68,36 @@ for (( i=0; i<${#text}; i++ )); do
 			color=$executeSpecialCommandArgument
 		elif [ "$executeSpecialCommandAction" = "size" ]; then
 			size=$executeSpecialCommandArgument
+		elif [ "$executeSpecialCommandAction" = "break" ] && [ "$executeSpecialCommandArgument" = "line" ]; then
+			mkdir -p tmp
+			convert $paths +append tmp/$imageCounter.$rowCounter.jpeg
+
+			((rowCounter=rowCounter+1))
+			paths=""
+		elif [ "$executeSpecialCommandAction" = "break" ] && [ "$executeSpecialCommandArgument" = "new" ]; then
+			mkdir -p tmp
+			convert $paths +append tmp/$imageCounter.$rowCounter.jpeg
+
+			((imageCounter=imageCounter+1))
+			rowCounter=0
+			paths=""
 		fi
 	fi
 done
 
+mkdir -p tmp
+convert $paths +append tmp/$imageCounter.$rowCounter.jpeg
+
+paths=""
+i=0
+while [[ $i -le $imageCounter ]]
+do
+   paths="$paths ( -background black tmp/$i.0.jpeg tmp/$i.1.jpeg -append ) "
+
+   ((i = i + 1))
+done
+
 convert $paths +append ticker.ppm
 convert ticker.ppm webserver/images/ticker.jpeg
+
+rm -rf tmp
