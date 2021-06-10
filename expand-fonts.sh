@@ -1,3 +1,7 @@
+cd images/fonts/Sans-Serif/
+
+mkdir -p white/16px/
+mkdir -p white/16px/special
 for folder in red green
 do
 	mkdir -p $folder
@@ -7,8 +11,10 @@ do
 	mkdir -p $folder/32px/special
 done
 
-for char in {A..Z} special/close-bracket special/comma special/degree special/dollar special/minus special/open-bracket special/percent special/period special/questionmark special/space
+for char in {0..9} {A..Z} special/close-bracket special/comma special/degree special/dollar special/minus special/open-bracket special/percent special/period special/questionmark special/space
 do
+	convert white/32px/$char.gif -resize 50% white/16px/$char.gif
+
 	convert white/32px/$char.gif +level-colors black,"#FF0000" red/32px/$char.gif
 	convert white/32px/$char.gif -resize 50% +level-colors black,"#FF0000" red/16px/$char.gif
 
