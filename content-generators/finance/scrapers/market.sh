@@ -20,4 +20,4 @@ fi
 if [ "`echo \"$change < 0\" | bc`" = "1" ] || [ "`echo \"$percent < 0\" | bc`" = "1" ]; then
 	echo -n "<color:red>"
 fi
-printf "%.2f (%.2f%%)<color:white>    " $change $percent
+printf "<break:new><size:16px>%.2f<break:line>(%.2f%%)<break:new><size:32px><color:white>    " $change $percent

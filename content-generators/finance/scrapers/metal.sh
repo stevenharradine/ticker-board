@@ -16,5 +16,5 @@ if [ "`echo \"$change < 0\" | bc`" = "1" ] && [ "`echo \"$percent < 0\" | bc`" =
 	echo -n "<color:red>"
 fi
 
-echo "$change * $cad2usd" | bc | xargs printf "$%'.2f "
-echo "($percent%)<color:white>    "
+echo "$change * $cad2usd" | bc | xargs printf "<break:new><size:16px>$%'.2f"
+echo "<break:line>($percent%)<break:new><size:32px><color:white>    "

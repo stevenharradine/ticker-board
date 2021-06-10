@@ -18,4 +18,4 @@ if [ "`echo \"$absolute_change < 0\" | bc`" = "1" ] || [ "`echo \"$relative_chan
 	echo -n "<color:red>"
 fi
 
-printf "%'.2f (%.2f%%)<color:white>    " $absolute_change $relative_change
+printf "<break:new><size:16px>%'.2f<break:line>(%.2f%%)<break:new><size:32px><color:white>    " $absolute_change $relative_change
