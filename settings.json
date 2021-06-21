@@ -3,6 +3,7 @@
   "led-cols": 64,
   "led-gpio-mapping": "adafruit-hat",
   "led-chain": 7,
+  "led-pwm-bits": 11,
   "webserver-host-binding": "0.0.0.0",
   "webserver-port": 8000
 }
