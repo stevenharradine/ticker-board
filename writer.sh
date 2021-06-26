@@ -42,7 +42,15 @@ for (( i=0; i<${#text}; i++ )); do
 				mappedChar="special/questionmark"
 			elif [ "$char" = "," ]; then
 				mappedChar="special/comma"
-			elif [ "$char" = "|" ] || [ "$char" = "," ] || [ "$char" = "'" ] || [ "$char" = ":" ] || [ "$char" = "/" ]; then
+			elif [ "$char" = ":" ]; then
+				mappedChar="special/colon"
+			elif [ "$char" = "'" ]; then
+				mappedChar="special/apostrophe"
+			elif [ "$char" = "/" ]; then
+				mappedChar="special/forward-slash"
+			elif [ "$char" = "\\" ]; then
+				mappedChar="special/back-slash"
+			elif [ "$char" = "|" ]; then
 				mappedChar="special/space"
 			fi
 		fi
