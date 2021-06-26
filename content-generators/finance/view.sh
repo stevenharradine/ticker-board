@@ -8,10 +8,10 @@ printf "%'.2f" $price
 
 echo -n "<break:new><size:32px> $image <break:new><size:16px>"
 
-if [ "`echo \"$change > 0\" | bc`" = "1" ] && [ "`echo \"$percent > 0\" | bc`" = "1" ]; then
+if [ "`echo \"$change > 0\" | bc`" = "1" ] || [ "`echo \"$percent > 0\" | bc`" = "1" ]; then
 	echo -n "<color:green>"
 fi
-if [ "`echo \"$change < 0\" | bc`" = "1" ] && [ "`echo \"$percent < 0\" | bc`" = "1" ]; then
+if [ "`echo \"$change < 0\" | bc`" = "1" ] || [ "`echo \"$percent < 0\" | bc`" = "1" ]; then
 	echo -n "<color:red>"
 fi
 
