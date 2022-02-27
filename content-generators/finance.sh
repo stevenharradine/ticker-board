@@ -42,3 +42,6 @@ source content-generators/finance/scrapers/crypto.sh eth-usd
 source content-generators/finance/scrapers/crypto.sh xlm-usd
 
 source content-generators/finance/scrapers/crypto.sh xrp-usd
+
+source content-generators/finance/scrapers/market.sh fund "huv"
+source content-generators/finance/view.sh

@@ -21,6 +21,10 @@ elif [ "$2" = "usdcad" ]; then
 	title="USD CAD"
 fi
 
+if [ "$1" = "fund" ]; then
+	url=$url"?countryCode=CA"
+fi
+
 
 cache=`curl --silent $url`
 price=`echo "$cache" | grep "meta name=\"price\" content=" | grep -o [,.0-9]* | tr -d ","`
