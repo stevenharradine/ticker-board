@@ -41,6 +41,21 @@ const requestListener = function (req, res) {
 
 		res.writeHead(returnCode);
 		res.end(buffer);
+	} else if (req.url == "/configure.html") {
+		serveStaticFile (res, '/webserver/configure.html', 'text/html')
+	} else if (req.url == "/settings.json") {
+		serveStaticFile (res, '/settings.json', 'text/javascript', 200, "settings=")
+	} else if (req.url == "/save.html") {
+		unsanitizedCookie = JSON.parse(req.headers.cookie) // Security Vul: need to escape/sanitize
+
+		// Run this on a secure network cause allows unsanitized client cookies to be written to the servers disks
+		fs.writeFile('settings.json', unsanitizedCookie, err => {
+			if (err) {
+				console.error(err)
+				return
+			}
+			console.log ("Settings saved.")
+		})
 	} else if (req.url == "/images/ticker.jpeg") {
 		serveStaticFile (res, '/webserver/images/ticker.jpeg', 'image/jpeg')
 	} else {
@@ -83,8 +98,9 @@ function restart_ticker (tickerType) {
 }
 
 // source: https://stackoverflow.com/questions/44354877/how-to-serve-image-from-node-server-without-express
-function serveStaticFile(res, path, contentType, responseCode) {
+function serveStaticFile(res, path, contentType, responseCode, pre) {
     if(!responseCode) responseCode = 200;
+    if(!pre) pre = "";
 
     // __dirname will resolve to the directory the executing script resides in.
     // So if your script resides in /home/sites/app.js, __dirname will resolve
@@ -99,7 +115,7 @@ function serveStaticFile(res, path, contentType, responseCode) {
         } 
         else {
             res.writeHead( responseCode, { 'Content-Type' : contentType });
-            res.end(data);
+            res.end(pre+data);
         }
     });
 }
