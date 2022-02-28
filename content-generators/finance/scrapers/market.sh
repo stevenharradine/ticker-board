@@ -4,7 +4,9 @@ url=$url"watch"
 url=$url".com/investing/$1/$2"
 
 convertUSD2CAD="false"
+title=""
 unitSign=""
+image=""
 
 if [ "$2" = "djia" ]; then
 	title="DJIA"
@@ -22,6 +24,8 @@ elif [ "$2" = "usdcad" ]; then
 fi
 
 if [ "$1" = "fund" ]; then
+	title=$2
+	unitSign="$"
 	url=$url"?countryCode=CA"
 fi
 
