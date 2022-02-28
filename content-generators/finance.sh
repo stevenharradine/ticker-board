@@ -45,3 +45,6 @@ source content-generators/finance/scrapers/crypto.sh xrp-usd
 
 source content-generators/finance/scrapers/market.sh fund "huv"
 source content-generators/finance/view.sh
+
+source content-generators/finance/scrapers/market.sh stock "pea"
+source content-generators/finance/view.sh

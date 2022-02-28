@@ -23,7 +23,7 @@ elif [ "$2" = "usdcad" ]; then
 	title="USD CAD"
 fi
 
-if [ "$1" = "fund" ]; then
+if [ "$1" = "fund" ] || [ "$1" = "stock" ]; then
 	title=$2
 	unitSign="$"
 	url=$url"?countryCode=CA"
