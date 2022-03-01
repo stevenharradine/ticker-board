@@ -14,7 +14,10 @@ elif [ "$1" = "AG" ]; then
 elif [ "$1" = "PT" ]; then
 	title=Platinum
 	image="<image:images/finance/32px/platinum.gif>"
-fi 
+elif [ "$1" = "PD" ]; then
+	title=Palladium
+	image="<image:images/finance/32px/silver.gif>"
+fi
 
 cache=`curl --silent $url`
 price=`echo "$cache" | grep "$1-bid" | tail -n 1 | grep -o "[0-9.]*" | tail -n 1`

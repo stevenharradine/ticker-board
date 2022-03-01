@@ -63,6 +63,10 @@ if [ "$platinum" == "true" ]; then
 	source content-generators/finance/scrapers/metal.sh PT
 fi
 
+if [ "$palladium" == "true" ]; then
+	source content-generators/finance/scrapers/metal.sh PD
+fi
+
 if [ "$btc" == "true" ]; then
 	source content-generators/finance/scrapers/crypto.sh btc-usd
 fi
