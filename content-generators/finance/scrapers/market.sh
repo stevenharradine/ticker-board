@@ -26,7 +26,10 @@ fi
 if [ "$1" = "fund" ] || [ "$1" = "stock" ]; then
 	title=$2
 	unitSign="$"
-	url=$url"?countryCode=CA"
+
+	if [ "$3" = "ca" ]; then
+		url=$url"?countryCode=CA"
+	fi
 fi
 
 

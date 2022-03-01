@@ -13,6 +13,7 @@ xrp=`cat settings.json | grep "\"xrp\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 xlm=`cat settings.json | grep "\"xlm\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 huv=`cat settings.json | grep "\"huv\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 pea=`cat settings.json | grep "\"pea\":" | cut -d":" -f2 | tr -d ",[:space:]"`
+lcid=`cat settings.json | grep "\"lcid\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 
 source content-generators/finance/scrapers/market.sh currency usdcad
 cad2usd="$price"
@@ -84,11 +85,16 @@ if [ "$xrp" == "true" ]; then
 fi
 
 if [ "$huv" == "true" ]; then
-	source content-generators/finance/scrapers/market.sh fund "huv"
+	source content-generators/finance/scrapers/market.sh fund "huv" ca
 	source content-generators/finance/view.sh
 fi
 
 if [ "$pea" == "true" ]; then
-	source content-generators/finance/scrapers/market.sh stock "pea"
+	source content-generators/finance/scrapers/market.sh stock "pea" ca
+	source content-generators/finance/view.sh
+fi
+
+if [ "$lcid" == "true" ]; then
+	source content-generators/finance/scrapers/market.sh stock "lcid"
 	source content-generators/finance/view.sh
 fi
