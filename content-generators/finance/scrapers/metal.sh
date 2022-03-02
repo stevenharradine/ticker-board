@@ -4,24 +4,25 @@ url="$url"co.com
 
 unitSign="$"
 convertUSD2CAD="true"
+symbol=${1^^}
 
-if [ "$1" = "au" ]; then
+if [ "$symbol" = "AU" ]; then
 	title=Gold
 	image="<image:images/finance/32px/gold.gif>"
-elif [ "$1" = "ag" ]; then
+elif [ "$symbol" = "AG" ]; then
 	title=Silver
 	image="<image:images/finance/32px/silver.gif>"
-elif [ "$1" = "pt" ]; then
+elif [ "$symbol" = "PT" ]; then
 	title=Platinum
 	image="<image:images/finance/32px/platinum.gif>"
-elif [ "$1" = "pd" ]; then
+elif [ "$symbol" = "PD" ]; then
 	title=Palladium
 	image="<image:images/finance/32px/silver.gif>"
 fi
 
 cache=`curl --silent $url`
-price=`echo "$cache" | grep "$1-bid" | tail -n 1 | grep -o "[0-9.]*" | tail -n 1`
-change=`echo "$cache" | grep "$1-change" | head -n 1 | cut -d">" -f4 | grep -o [\-+0-9.]* | tr -d '+'`
+price=`echo "$cache" | grep "$symbol-bid" | tail -n 1 | grep -o "[0-9.]*" | tail -n 1`
+change=`echo "$cache" | grep "$symbol-change" | head -n 1 | cut -d">" -f4 | grep -o [\-+0-9.]* | tr -d '+'`
 percent=`echo "($change / $price) * 100" | bc -l | xargs printf "%.2f"`
 
 source content-generators/finance/view.sh
