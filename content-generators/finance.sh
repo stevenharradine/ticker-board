@@ -7,6 +7,7 @@ au=`cat settings.json | grep "\"au\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 ag=`cat settings.json | grep "\"ag\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 pt=`cat settings.json | grep "\"pt\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 pd=`cat settings.json | grep "\"pd\":" | cut -d":" -f2 | tr -d ",[:space:]"`
+oil=`cat settings.json | grep "\"oil\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 btc=`cat settings.json | grep "\"btc\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 eth=`cat settings.json | grep "\"eth\":" | cut -d":" -f2 | tr -d ",[:space:]"`
 xrp=`cat settings.json | grep "\"xrp\":" | cut -d":" -f2 | tr -d ",[:space:]"`
