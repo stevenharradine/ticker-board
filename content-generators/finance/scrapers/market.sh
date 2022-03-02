@@ -35,5 +35,5 @@ fi
 
 cache=`curl --silent $url`
 price=`echo "$cache" | grep "meta name=\"price\" content=" | grep -o [,.0-9]* | tr -d ","`
-change=`echo "$cache" | grep "meta name=\"priceChange\" content=" | grep -o [.0-9]*`
-percent=`echo "$cache" | grep "meta name=\"priceChangePercent\" content=" | grep -o [.0-9]*`
+change=`echo "$cache" | grep "meta name=\"priceChange\" content=" | grep -o [\-.0-9]*`
+percent=`echo "$cache" | grep "meta name=\"priceChangePercent\" content=" | grep -o [\-.0-9]*`
