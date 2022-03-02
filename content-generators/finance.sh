@@ -68,7 +68,7 @@ for i in "${!cryptos[@]}"; do
 done
 
 equityType=(   "fund" "stock" "stock" "stock" "stock" "stock" "fund")
-equityTicker=( "huv"  "pea"   "lcid"  "rvin"  "duol"  "abt"   "hack")
+equityTicker=( "huv"  "pea"   "lcid"  "rivn"  "duol"  "abt"   "hack")
 equityMarket=( "ca"   "ca"    "us"    "us"    "us"    "us"    "us")
 
 for i in "${!equityType[@]}"; do
