@@ -52,9 +52,16 @@ const requestListener = function (req, res) {
 		fs.writeFile('settings.json', unsanitizedCookie, err => {
 			if (err) {
 				console.error(err)
+
+				res.writeHead(500);
+				res.end("error");
+
 				return
 			}
 			console.log ("Settings saved.")
+
+			res.writeHead(200);
+			res.end("ok");
 		})
 	} else if (req.url == "/images/ticker.jpeg") {
 		serveStaticFile (res, '/webserver/images/ticker.jpeg', 'image/jpeg')
