@@ -5,16 +5,16 @@ url="$url"co.com
 unitSign="$"
 convertUSD2CAD="true"
 
-if [ "$1" = "AU" ]; then
+if [ "$1" = "au" ]; then
 	title=Gold
 	image="<image:images/finance/32px/gold.gif>"
-elif [ "$1" = "AG" ]; then
+elif [ "$1" = "ag" ]; then
 	title=Silver
 	image="<image:images/finance/32px/silver.gif>"
-elif [ "$1" = "PT" ]; then
+elif [ "$1" = "pt" ]; then
 	title=Platinum
 	image="<image:images/finance/32px/platinum.gif>"
-elif [ "$1" = "PD" ]; then
+elif [ "$1" = "pd" ]; then
 	title=Palladium
 	image="<image:images/finance/32px/silver.gif>"
 fi
