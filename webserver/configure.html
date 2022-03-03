@@ -1,171 +1,183 @@
-<!doctype html><html><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/></head><body>
-<script src="settings.json"></script>
-<script>
-	function save () {
-		var settings_enabled = [
-			"ticker-time-step-ms",
-			"led-cols",
-			"led-gpio-mapping",
-			"led-chain",
-			"led-pwm-bits",
-			"webserver-host-binding",
-			"webserver-port",
-			"tsx",
-			"djia",
-			"nasdaq",
-			"oil",
-			"au",
-			"ag",
-			"pt",
-			"pd",
-			"huv",
-			"lcid",
-			"rivn",
-			"hack",
-			"abt",
-			"pea",
-			"btc",
-			"eth",
-			"xrp",
-			"xlm"
-		];
-		buffer  = ''
-		buffer += '{\n'
+<!doctype html>
+<html>
+	<head>
+		<meta charSet="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<script src="settings.json"></script>
+		<script>
+			function save () {
+				var settings_enabled = [
+					"ticker-time-step-ms",
+					"led-cols",
+					"led-gpio-mapping",
+					"led-chain",
+					"led-pwm-bits",
+					"webserver-host-binding",
+					"webserver-port",
+					"tsx",
+					"djia",
+					"nasdaq",
+					"oil",
+					"au",
+					"ag",
+					"pt",
+					"pd",
+					"huv",
+					"lcid",
+					"rivn",
+					"hack",
+					"abt",
+					"pea",
+					"btc",
+					"eth",
+					"xrp",
+					"xlm"
+				];
+				buffer  = ''
+				buffer += '{\n'
 
-		settings_enabled.forEach(function (item, index, arr) {
-			element = document.getElementById(item);
-			
-			if (element.type == "text") {
-				value = element.value;
+				settings_enabled.forEach(function (item, index, arr) {
+					element = document.getElementById(item);
+					
+					if (element.type == "text") {
+						value = element.value;
 
-				if (!parseInt(value)) {
-					value = "\"" + value + "\""
-				}
+						if (!parseInt(value)) {
+							value = "\"" + value + "\""
+						}
 
-			} else if (element.type == "checkbox") {
-				value = element.checked;
+					} else if (element.type == "checkbox") {
+						value = element.checked;
+					}
+
+					buffer += '  "'+ item + '": '+value+',\n'
+				});
+
+				// remove last ,\n
+				buffer = buffer.substring(0, buffer.length - 2);
+
+				// add new newline and close the object
+				buffer += '\n}\n'
+
+				document.cookie = JSON.stringify(buffer)
+
+				location.href = "save.html"
 			}
-
-			buffer += '  "'+ item + '": '+value+',\n'
-		});
-
-		// remove last ,\n
-		buffer = buffer.substring(0, buffer.length - 2);
-
-		// add new newline and close the object
-		buffer += '\n}\n'
-
-		document.cookie = JSON.stringify(buffer)
-
-		location.href = "save.html"
-	}
-</script>
-<h1>Configure</h1>
-<input type="button" value="Save" onclick="javascript: save ()" />
-<h2>Hardware</h2>
-<table>
-	<tr>
-		<td>ticker-time-step-ms</td>
-		<td><input type="text" id="ticker-time-step-ms" /></td>
-	</tr>
-	<tr>
-		<td>led-cols</td>
-		<td><input type="text" id="led-cols" />
-	</tr>
-	<tr>
-		<td>led-gpio-mapping</td>
-		<td><input type="text" id="led-gpio-mapping" />
-	</tr>
-	<tr>
-		<td>led-chain</td>
-		<td><input type="text" id="led-chain" />
-	</tr>
-	<tr>
-		<td>led-pwm-bits</td>
-		<td><input type="text" id="led-pwm-bits" /></td>
-	</tr>
-</table>
-<h2>Webserver</h2>
-<table>
-	<tr>
-		<td>webserver-host-binding</td>
-		<td><input type="text" id="webserver-host-binding" /></td>
-	</tr>
-	<tr>
-		<td>webserver-port</td>
-		<td><input type="text" id="webserver-port" /></td>
-	</tr>
-</table>
-<h2>Finance</h2>
-<h3>Index</h3>
-<ul>
-<li><input type="checkbox" id="tsx" /> <label for="tsx">TSX</label></li>
-<li><input type="checkbox" id="djia" /> <label for="djia">DJIA</label></li>
-<li><input type="checkbox" id="nasdaq" /> <label for="nasdaq">NASDAQ</label></li>
-</ul>
-<h3>Metals</h3>
-<ul>
-<li><input type="checkbox" id="au" /> <label for="au">Gold</label></li>
-<li><input type="checkbox" id="ag" /> <label for="ag">Silver</label></li>
-<li><input type="checkbox" id="pt" /> <label for="pt">Platinum</label></li>
-<li><input type="checkbox" id="pd" /> <label for="pd">Palladium</label></li>
-</ul>
-<h3>Commodities</h3>
-<ul>
-<li><input type="checkbox" id="oil" /> <label for="oil">Oil</label></li>
-</ul>
-<h3>Stocks</h3>
-<ul>
-<li><input type="checkbox" id="huv" /> <label for="huv">S&P 500 VIX ETF</label></li>
-<li><input type="checkbox" id="pea" /> <label for="pea">Pieridae Energy Ltd</label></li>
-<li><input type="checkbox" id="lcid" /> <label for="lcid">Lucid</label></li>
-<li><input type="checkbox" id="rivn" /> <label for="rivn">Rivian</label></li>
-<li><input type="checkbox" id="abt" /> <label for="abt">Abbot Laboratories</label></li>
-<li><input type="checkbox" id="hack" /> <label for="hack">Cyber Security ETF</label></li>
-</ul>
-<h3>Crypto</h3>
-<ul>
-<li><input type="checkbox" id="btc" /> <label for="btc">Bitcoin</label></li>
-<li><input type="checkbox" id="eth" /> <label for="eth">Ethereum</label></li>
-<li><input type="checkbox" id="xrp" /> <label for="xrp">Ripple</label></li>
-<li><input type="checkbox" id="xlm" /> <label for="xlm">Stellar</label></li>
-</ul>
-<script>
-	var settings_enabled = [
-		"ticker-time-step-ms",
-		"led-cols",
-		"led-gpio-mapping",
-		"led-chain",
-		"led-pwm-bits",
-		"webserver-host-binding",
-		"webserver-port",
-	];
-	settings_enabled.forEach(function (item, index, arr) {
-		document.getElementById(item).value = settings[item];
-	});
-	var settings_enabled = [
-		"tsx",
-		"djia",
-		"nasdaq",
-		"oil",
-		"au",
-		"ag",
-		"pt",
-		"pd",
-		"huv",
-		"pea",
-		"lcid",
-		"rivn",
-		"hack",
-		"abt",
-		"btc",
-		"eth",
-		"xrp",
-		"xlm"
-	];
-	settings_enabled.forEach(function (item, index, arr) {
-		document.getElementById(item).checked = settings[item];
-	});
-</script>
-</body>
+		</script>
+		<h1>Configure</h1>
+		<input type="button" value="Save" onclick="javascript: save ()" />
+		<ul>
+			<li><a href="/override.html">override</a></li>
+			<li><a href="/current_ticker.html">view current ticker</a></li>
+			<li><a href="/configure.html">configure</a></li>
+		</ul>
+		<h2>Hardware</h2>
+		<table>
+			<tr>
+				<td>ticker-time-step-ms</td>
+				<td><input type="text" id="ticker-time-step-ms" /></td>
+			</tr>
+			<tr>
+				<td>led-cols</td>
+				<td><input type="text" id="led-cols" />
+			</tr>
+			<tr>
+				<td>led-gpio-mapping</td>
+				<td><input type="text" id="led-gpio-mapping" />
+			</tr>
+			<tr>
+				<td>led-chain</td>
+				<td><input type="text" id="led-chain" />
+			</tr>
+			<tr>
+				<td>led-pwm-bits</td>
+				<td><input type="text" id="led-pwm-bits" /></td>
+			</tr>
+		</table>
+		<h2>Webserver</h2>
+		<table>
+			<tr>
+				<td>webserver-host-binding</td>
+				<td><input type="text" id="webserver-host-binding" /></td>
+			</tr>
+			<tr>
+				<td>webserver-port</td>
+				<td><input type="text" id="webserver-port" /></td>
+			</tr>
+		</table>
+		<h2>Finance</h2>
+		<h3>Index</h3>
+		<ul>
+			<li><input type="checkbox" id="tsx" /> <label for="tsx">TSX</label></li>
+			<li><input type="checkbox" id="djia" /> <label for="djia">DJIA</label></li>
+			<li><input type="checkbox" id="nasdaq" /> <label for="nasdaq">NASDAQ</label></li>
+		</ul>
+		<h3>Metals</h3>
+		<ul>
+			<li><input type="checkbox" id="au" /> <label for="au">Gold</label></li>
+			<li><input type="checkbox" id="ag" /> <label for="ag">Silver</label></li>
+			<li><input type="checkbox" id="pt" /> <label for="pt">Platinum</label></li>
+			<li><input type="checkbox" id="pd" /> <label for="pd">Palladium</label></li>
+		</ul>
+		<h3>Commodities</h3>
+		<ul>
+			<li><input type="checkbox" id="oil" /> <label for="oil">Oil</label></li>
+		</ul>
+		<h3>Stocks</h3>
+		<ul>
+			<li><input type="checkbox" id="huv" /> <label for="huv">S&P 500 VIX ETF</label></li>
+			<li><input type="checkbox" id="pea" /> <label for="pea">Pieridae Energy Ltd</label></li>
+			<li><input type="checkbox" id="lcid" /> <label for="lcid">Lucid</label></li>
+			<li><input type="checkbox" id="rivn" /> <label for="rivn">Rivian</label></li>
+			<li><input type="checkbox" id="abt" /> <label for="abt">Abbot Laboratories</label></li>
+			<li><input type="checkbox" id="hack" /> <label for="hack">Cyber Security ETF</label></li>
+		</ul>
+		<h3>Crypto</h3>
+		<ul>
+			<li><input type="checkbox" id="btc" /> <label for="btc">Bitcoin</label></li>
+			<li><input type="checkbox" id="eth" /> <label for="eth">Ethereum</label></li>
+			<li><input type="checkbox" id="xrp" /> <label for="xrp">Ripple</label></li>
+			<li><input type="checkbox" id="xlm" /> <label for="xlm">Stellar</label></li>
+		</ul>
+		<script>
+			var settings_enabled = [
+				"ticker-time-step-ms",
+				"led-cols",
+				"led-gpio-mapping",
+				"led-chain",
+				"led-pwm-bits",
+				"webserver-host-binding",
+				"webserver-port",
+			];
+			settings_enabled.forEach(function (item, index, arr) {
+				document.getElementById(item).value = settings[item];
+			});
+			var settings_enabled = [
+				"tsx",
+				"djia",
+				"nasdaq",
+				"oil",
+				"au",
+				"ag",
+				"pt",
+				"pd",
+				"huv",
+				"pea",
+				"lcid",
+				"rivn",
+				"hack",
+				"abt",
+				"btc",
+				"eth",
+				"xrp",
+				"xlm"
+			];
+			settings_enabled.forEach(function (item, index, arr) {
+				document.getElementById(item).checked = settings[item];
+			});
+		</script>
+	</body>
 </html>
