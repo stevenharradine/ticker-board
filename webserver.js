@@ -143,7 +143,11 @@ function serveStaticFile(res, path, contentType, responseCode, pre) {
         } 
         else {
             res.writeHead( responseCode, { 'Content-Type' : contentType });
-            res.end(pre+data);
+            if (pre !== "") {
+                res.write (pre);
+            }
+            res.write (data);
+            res.end();
         }
     });
 }
