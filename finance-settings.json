@@ -65,7 +65,7 @@
   }, {
     "name": "Duolingo",
     "type": "stock",
-    "ticker": "doul",
+    "ticker": "duol",
     "market": "us",
     "enabled": false
   }, {
