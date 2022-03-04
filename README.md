@@ -6,6 +6,7 @@ Displays information on the adafruit led matrix display.  This project works by 
 ## Requirements
  * https://github.com/hzeller/rpi-rgb-led-matrix
  * imagemagick
+ * jq
  * LED matrix panel (https://www.adafruit.com/product/2276)
 
 ## Usage
