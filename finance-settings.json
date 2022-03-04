@@ -40,31 +40,45 @@
   }], 
   "stocks": [{
     "name": "S&P 500 VIX ETF",
+    "type": "fund",
     "ticker": "huv",
+    "market": "ca",
     "enabled": false
   }, {
     "name": "Pieridae Energy Ltd",
+    "type": "stock",
     "ticker": "pea",
+    "market": "ca",
     "enabled": false
   }, {
     "name": "Lucid",
+    "type": "stock",
     "ticker": "lcid",
+    "market": "us",
     "enabled": false
   }, {
     "name": "Rivian",
+    "type": "stock",
     "ticker": "rivn",
+    "market": "us",
     "enabled": false
   }, {
     "name": "Duolingo",
+    "type": "stock",
     "ticker": "doul",
+    "market": "us",
     "enabled": false
   }, {
     "name": "Abbot Labratories",
+    "type": "stock",
     "ticker": "abt",
+    "market": "us",
     "enabled": false
   }, {
     "name": "Cyber Security ETF",
+    "type": "fund",
     "ticker": "hack",
+    "market": "us",
     "enabled": false
   }], 
   "cryptos": [{

@@ -57,7 +57,11 @@
 					buffer += '  "' + item + '": [{\n'
 					for (var j = 0; j < financeSettings[item].length; j++) {
 						buffer += '    "name": "' + financeSettings[item][j].name + '",\n'
+						if (item == "stocks")
+							buffer += '    "type": "' + financeSettings[item][j].type + '",\n'
 						buffer += '    "ticker": "' + financeSettings[item][j].ticker + '",\n'
+						if (item == "stocks")
+							buffer += '    "market": "' + financeSettings[item][j].market + '",\n'
 						buffer += '    "enabled": ' + document.getElementById(financeSettings[item][j].ticker).checked + '\n'
 						buffer += '  }, {\n'
 					}
