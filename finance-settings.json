@@ -1,0 +1,87 @@
+{
+  "markets": [{
+    "name": "TSX",
+    "ticker": "tsx",
+    "enabled": true
+  }, {
+    "name": "DJIA",
+    "ticker": "djia",
+    "enabled": true
+  }, {
+    "name": "NASDAQ",
+    "ticker": "nasdaq",
+    "enabled": true
+  }, {
+    "name": "FTSE",
+    "ticker": "ftse",
+    "enabled": false
+  }], 
+  "metals": [{
+    "name": "Gold",
+    "ticker": "au",
+    "enabled": false
+  }, {
+    "name": "Silver",
+    "ticker": "ag",
+    "enabled": false
+  }, {
+    "name": "Platinum",
+    "ticker": "pt",
+    "enabled": false
+  }, {
+    "name": "Palladium",
+    "ticker": "pd",
+    "enabled": false
+  }], 
+  "commodities": [{
+    "name": "Oil",
+    "ticker": "oil",
+    "enabled": false
+  }], 
+  "stocks": [{
+    "name": "S&P 500 VIX ETF",
+    "ticker": "huv",
+    "enabled": false
+  }, {
+    "name": "Pieridae Energy Ltd",
+    "ticker": "pea",
+    "enabled": false
+  }, {
+    "name": "Lucid",
+    "ticker": "lcid",
+    "enabled": false
+  }, {
+    "name": "Rivian",
+    "ticker": "rivn",
+    "enabled": false
+  }, {
+    "name": "Duolingo",
+    "ticker": "doul",
+    "enabled": false
+  }, {
+    "name": "Abbot Labratories",
+    "ticker": "abt",
+    "enabled": false
+  }, {
+    "name": "Cyber Security ETF",
+    "ticker": "hack",
+    "enabled": false
+  }], 
+  "cryptos": [{
+    "name": "Bitcoin",
+    "ticker": "btc",
+    "enabled": false
+  }, {
+    "name": "Ethereum",
+    "ticker": "eth",
+    "enabled": false
+  }, {
+    "name": "Ripple",
+    "ticker": "xrp",
+    "enabled": false
+  }, {
+    "name": "Stellar",
+    "ticker": "xlm",
+    "enabled": false
+  }]
+}

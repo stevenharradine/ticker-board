@@ -1,25 +1,12 @@
 size="32px"
 
-tsx=`cat settings.json | grep "\"tsx\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-djia=`cat settings.json | grep "\"djia\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-nasdaq=`cat settings.json | grep "\"nasdaq\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-au=`cat settings.json | grep "\"au\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-ag=`cat settings.json | grep "\"ag\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-pt=`cat settings.json | grep "\"pt\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-pd=`cat settings.json | grep "\"pd\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-oil=`cat settings.json | grep "\"oil\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-btc=`cat settings.json | grep "\"btc\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-eth=`cat settings.json | grep "\"eth\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-xrp=`cat settings.json | grep "\"xrp\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-xlm=`cat settings.json | grep "\"xlm\":" | cut -d":" -f2 | tr -d ",[:space:]"`
-
 source content-generators/finance/scrapers/market.sh currency usdcad
 cad2usd="$price"
 unitSign="$"
 image="$"
 source content-generators/finance/view.sh
 
-if [ "$tsx" == "true" ]; then
+if [ `cat finance-settings.json | jq '.markets[] | select(.ticker == "tsx").enabled'` == "true" ]; then
 	url=https://www.
 	url=$url"spgl"
 	url=$url"obal.com/spd"
@@ -35,51 +22,84 @@ if [ "$tsx" == "true" ]; then
 	source content-generators/finance/view.sh
 fi
 
-if [ "$djia" == "true" ]; then
+if [ `cat finance-settings.json | jq '.markets[] | select(.ticker == "djia").enabled'` == "true" ]; then
 	source content-generators/finance/scrapers/market.sh index djia
 	source content-generators/finance/view.sh
 fi
 
-if [ "$nasdaq" == "true" ]; then
+if [ `cat finance-settings.json | jq '.markets[] | select(.ticker == "nasdaq").enabled'` == "true" ]; then
 	source content-generators/finance/scrapers/market.sh index comp
 	source content-generators/finance/view.sh
 fi
 
-if [ "$oil" == "true" ]; then
+if [ `cat finance-settings.json | jq '.commodities[] | select(.ticker == "oil").enabled'` == "true" ]; then
 	source content-generators/finance/scrapers/market.sh future "crude%20oil%20-%20electronic"
 	source content-generators/finance/view.sh
 fi
 
-metals=( "au" "ag" "pt" "pd" )
+# Metals
+numberOfMetals=`cat finance-settings.json | jq '.metals' | jq length`
+metals=()
+metalsEnabled=()
+for (( i = 0; i < numberOfMetals; i++ )); do
+	ticker=`cat finance-settings.json | jq '.metals['$i']' | jq '.ticker' | cut -d "\"" -f 2`
+	enabled=`cat finance-settings.json | jq '.metals['$i']' | jq '.enabled'`
+
+	metals+=($ticker)
+	metalsEnabled+=($enabled)
+done
+
 for i in "${!metals[@]}"; do
 	metal=${metals[$i]}
 
-	if [ ${!metal} == "true" ]; then
+	if [ ${metalsEnabled[$i]} == "true" ]; then
 		source content-generators/finance/scrapers/metal.sh "$metal"
 	fi
 done
 
-cryptos=( "btc" "eth" "xlm" "xrp" )
+# Cryptos
+numberOfCryptos=`cat finance-settings.json | jq '.cryptos' | jq length`
+cryptos=()
+for (( i = 0; i < numberOfCryptos; i++ )); do
+	ticker=`cat finance-settings.json | jq '.cryptos['$i']' | jq '.ticker' | cut -d "\"" -f 2`
+	enabled=`cat finance-settings.json | jq '.cryptos['$i']' | jq '.enabled'`
+
+	cryptos+=($ticker)
+	cryptosEnabled+=($enabled)
+done
+
 for i in "${!cryptos[@]}"; do
 	crypto=${cryptos[$i]}
 
-	if [ ${!crypto} == "true" ]; then
+	if [ ${cryptosEnabled[$i]} == "true" ]; then
 		source content-generators/finance/scrapers/crypto.sh "$crypto"-usd
 	fi
 done
 
-equityType=(   "fund" "stock" "stock" "stock" "stock" "stock" "fund")
-equityTicker=( "huv"  "pea"   "lcid"  "rivn"  "duol"  "abt"   "hack")
-equityMarket=( "ca"   "ca"    "us"    "us"    "us"    "us"    "us")
+# Stocks
+numberOfStocks=`cat finance-settings.json | jq '.stocks' | jq length`
+types=()
+tickers=()
+markets=()
+stocksEnabled=()
+for (( i = 0; i < numberOfStocks; i++ )); do
+	type=`cat finance-settings.json | jq '.stocks['$i']' | jq '.type' | cut -d "\"" -f 2`
+	ticker=`cat finance-settings.json | jq '.stocks['$i']' | jq '.ticker' | cut -d "\"" -f 2`
+	market=`cat finance-settings.json | jq '.stocks['$i']' | jq '.market' | cut -d "\"" -f 2`
+	enabled=`cat finance-settings.json | jq '.stocks['$i']' | jq '.enabled'`
 
-for i in "${!equityType[@]}"; do
-	type=${equityType[$i]}
-	ticker=${equityTicker[$i]}
-	market=${equityMarket[$i]}
+	types+=($type)
+	tickers+=($ticker)
+	markets+=($market)
+	stocksEnabled+=($enabled)
+done
 
-	isTickerEnabled=`cat settings.json | grep -E "\"${ticker}\":" | cut -d":" -f2 | tr -d ",[:space:]"`
+for i in "${!types[@]}"; do
+	type=${types[$i]}
+	ticker=${tickers[$i]}
+	market=${markets[$i]}
 
-	if [ "$isTickerEnabled" == "true" ]; then
+	if [ ${stocksEnabled[$i]} == "true" ]; then
 		source content-generators/finance/scrapers/market.sh "$type" "$ticker" "$market"
 		source content-generators/finance/view.sh
 	fi

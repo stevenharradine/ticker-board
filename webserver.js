@@ -45,6 +45,27 @@ const requestListener = function (req, res) {
 		serveStaticFile (res, '/webserver/configure.html', 'text/html')
 	} else if (req.url == "/settings.json") {
 		serveStaticFile (res, '/settings.json', 'text/javascript', 200, "settings=")
+	} else if (req.url == "/finance-settings.json") {
+		serveStaticFile (res, '/finance-settings.json', 'text/javascript', 200, "financeSettings=")
+	} else if (req.url == "/save-finance.html") {
+		unsanitizedCookie = JSON.parse(req.headers.cookie) // Security Vul: need to escape/sanitize
+		
+		// Run this on a secure network cause allows unsanitized client cookies to be written to the servers disks
+		fs.writeFile('finance-settings.json', unsanitizedCookie, err => {
+			if (err) {
+				console.error(err)
+
+				res.writeHead(500);
+				res.end("error");
+
+				return
+			}
+			console.log ("Settings finance saved.")
+
+			res.writeHead(200);
+			res.end("ok");
+		})
+
 	} else if (req.url == "/save.html") {
 		unsanitizedCookie = JSON.parse(req.headers.cookie) // Security Vul: need to escape/sanitize
 
