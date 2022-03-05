@@ -1,0 +1,15 @@
+# Start the webserver
+@reboot cd ~/ticker-board && /usr/bin/git pull >> webserver.log 2>&1; node webserver.js > webserver.log 2>&1
+
+# display an initial welcome message before the other cronjobs kick in on boot
+@reboot sleep 10; cd ~/ticker-board/ && bash writer.sh "Connect to TickerBoard at <color:green>`/usr/bin/ip address | /usr/bin/grep inet | /usr/bin/grep wlan0 | /usr/bin/cut -d" " -f6 | /usr/bin/cut -d"/" -f1 | xargs`:`cat /home/pi/ticker-board/settings.json | grep webserver-port | cut -d':' -f2 | xargs`    " && cp ticker.ppm ../rpi-rgb-led-matrix/examples-api-use/ && cd ~/rpi-rgb-led-matrix/examples-api-use && sudo ./demo -D 1 ticker.ppm -m 1 --led-cols=64 --led-gpio-mapping=adafruit-hat --led-chain=12 --led-pwm-bits=2
+
+# Regularly cycle through the differnet types of information
+ 5 * * * * cd ~/ticker-board && bash restart-ticker.sh finance
+15 * * * * cd ~/ticker-board && bash restart-ticker.sh news
+20 * * * * cd ~/ticker-board && bash restart-ticker.sh weather
+25 * * * * cd ~/ticker-board && bash restart-ticker.sh finance
+35 * * * * cd ~/ticker-board && bash restart-ticker.sh news
+40 * * * * cd ~/ticker-board && bash restart-ticker.sh weather
+45 * * * * cd ~/ticker-board && bash restart-ticker.sh finance
+55 * * * * cd ~/ticker-board && bash restart-ticker.sh news
