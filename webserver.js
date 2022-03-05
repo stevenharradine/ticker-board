@@ -48,48 +48,33 @@ const requestListener = function (req, res) {
 	} else if (req.url == "/finance-settings.json") {
 		serveStaticFile (res, '/finance-settings.json', 'text/javascript', 200, "financeSettings=")
 	} else if (req.url == "/save-finance.html") {
-		unsanitizedCookie = JSON.parse(req.headers.cookie) // Security Vul: need to escape/sanitize
-		
-		// Run this on a secure network cause allows unsanitized client cookies to be written to the servers disks
-		fs.writeFile('finance-settings.json', unsanitizedCookie, err => {
-			if (err) {
-				console.error(err)
-
-				res.writeHead(500);
-				res.end("error");
-
-				return
-			}
-			console.log ("Settings finance saved.")
-
-			res.writeHead(200);
-			res.end("ok");
-		})
-
+		saveSettings (res, JSON.parse(req.headers.cookie), "finance-")
 	} else if (req.url == "/save.html") {
-		unsanitizedCookie = JSON.parse(req.headers.cookie) // Security Vul: need to escape/sanitize
-
-		// Run this on a secure network cause allows unsanitized client cookies to be written to the servers disks
-		fs.writeFile('settings.json', unsanitizedCookie, err => {
-			if (err) {
-				console.error(err)
-
-				res.writeHead(500);
-				res.end("error");
-
-				return
-			}
-			console.log ("Settings saved.")
-
-			res.writeHead(200);
-			res.end("ok");
-		})
+		saveSettings (res, JSON.parse(req.headers.cookie), "")
 	} else if (req.url == "/images/ticker.jpeg") {
 		serveStaticFile (res, '/webserver/images/ticker.jpeg', 'image/jpeg')
 	} else {
 		serveStaticFile (res, '/webserver/errors/404.html', 'text/html')
 	}
 };
+
+function saveSettings (res, unsanitizedCookie, profileType) {
+		// Run this on a secure network cause allows unsanitized client cookies to be written to the servers disks
+		fs.writeFile(profileType + 'settings.json', unsanitizedCookie, err => {
+			if (err) {
+				console.error(err)
+
+				res.writeHead(500);
+				res.end("error");
+
+				return
+			}
+			console.log (profileType + "settings.json saved.")
+
+			res.writeHead(200);
+			res.end("ok");
+		})
+}
 
 function restart_ticker (tickerType) {
 	// whitelist input into exec function
