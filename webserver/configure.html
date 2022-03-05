@@ -82,6 +82,25 @@
 
 				location.href = "save-finance.html"
 			}
+
+			function stocksAdd () {
+				name=prompt("Name of equity:")
+				ticker=prompt("Ticker symbol:")
+				market=prompt("Country of the market trading this equity (us, ca):")
+				type=prompt("Type of equity (stock, fund) :")
+
+				financeSettings['stocks'].push ({"name":name, "type": type, "ticker": ticker, "market": market, "enabled": true})
+
+				draw_finance_settings();
+			}
+			function cryptosAdd () {
+				name=prompt("Name of crypto:")
+				ticker=prompt("Ticker symbol:")
+
+				financeSettings['cryptos'].push ({"name":name, "ticker": ticker, "enabled": true})
+
+				draw_finance_settings();
+			}
 		</script>
 		<h1>Configure</h1>
 		<input type="button" value="Save" onclick="javascript: save ()" />
@@ -107,22 +126,30 @@
 		</table>
 		<h2>Finance</h2>
 		<input type="button" value="Save" onclick="javascript: save_finance ()" />
+		<div id="finance"></div>
 		<script>
-			var keys = Object.keys(financeSettings)
-			var numberOfKeys = keys.length
+			function draw_finance_settings () {
+				var keys = Object.keys(financeSettings)
+				var numberOfKeys = keys.length
+				var buffer = ""
 
-			for (var i = 0; i < numberOfKeys; i++) {
-				var key = keys[i]
-				document.write ("<h3>" + key + "</h3>")
+				for (var i = 0; i < numberOfKeys; i++) {
+					var key = keys[i]
+					buffer += "<h3>" + key + ((key == "stocks" || key == "cryptos") ? " <input type='button' value='add' onClick='" + key +"Add()' />" : "") + "</h3>"
 
-				for (var j = 0; j < financeSettings[key].length; j++) {
-					var name = financeSettings[key][j].name
-					var ticker = financeSettings[key][j].ticker
-					var enabled = financeSettings[key][j].enabled ? " checked=checked " : ""
+					for (var j = 0; j < financeSettings[key].length; j++) {
+						var name = financeSettings[key][j].name
+						var ticker = financeSettings[key][j].ticker
+						var enabled = financeSettings[key][j].enabled ? " checked=checked " : ""
 
-					document.write ('<li><input type="checkbox" id="' + ticker + '" ' + enabled + '/> <label for="' + ticker + '">' + name + '</label></li>')
+						buffer += '<li><input type="checkbox" id="' + ticker + '" ' + enabled + '/> <label for="' + ticker + '">' + name + '</label></li>'
+					}
 				}
+
+				document.getElementById("finance").innerHTML=buffer
 			}
+
+			draw_finance_settings ()
 		</script>
 	</body>
 </html>
