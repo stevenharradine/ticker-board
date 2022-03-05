@@ -106,6 +106,8 @@ do
 done
 
 convert $paths +append ticker.ppm
+
+mkdir -p webserver/images/
 convert ticker.ppm webserver/images/ticker.jpeg
 
 rm -rf tmp
