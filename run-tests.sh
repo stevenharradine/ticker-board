@@ -17,7 +17,7 @@ while read script ; do
 	
 	if [ "$result" == "Pass" ]; then
 		((++number_of_tests_passed))
-	elif [ "$result" == "Fail" ]; then
+	else
 		((++number_of_tests_failed))
 	fi
 
