@@ -91,7 +91,16 @@
 
 				financeSettings['stocks'].push ({"name":name, "type": type, "ticker": ticker, "market": market, "enabled": true})
 
-				draw_finance_settings();
+				draw_finance_settings()
+			}
+			function deleteSetting (type, ticker) {
+				financeSettings[type].forEach (function (item, index) {
+					if (item.ticker == ticker.id) {
+						financeSettings[type].splice (index, 1)
+					}
+				})
+
+				draw_finance_settings()
 			}
 			function cryptosAdd () {
 				name=prompt("Name of crypto:")
@@ -99,7 +108,7 @@
 
 				financeSettings['cryptos'].push ({"name":name, "ticker": ticker, "enabled": true})
 
-				draw_finance_settings();
+				draw_finance_settings()
 			}
 		</script>
 		<h1>Configure</h1>
@@ -142,7 +151,7 @@
 						var ticker = financeSettings[key][j].ticker
 						var enabled = financeSettings[key][j].enabled ? " checked=checked " : ""
 
-						buffer += '<li><input type="checkbox" id="' + ticker + '" ' + enabled + '/> <label for="' + ticker + '">' + name + '</label></li>'
+						buffer += '<li><input type="checkbox" id="' + ticker + '" ' + enabled + '/> <label for="' + ticker + '">' + name + '</label>' + ((key == "stocks" || key == "cryptos") ? " <input type='button' value='delete' onClick='deleteSetting(" + "\"" + key + "\"" + ", " + ticker + ")' />" : "") + '</li>'
 					}
 				}
 
