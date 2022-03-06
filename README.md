@@ -1,4 +1,6 @@
 # ticker-board
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Tests](https://github.com/stevenharradine/ticker-board/actions/workflows/tests.yaml/badge.svg)](https://github.com/stevenharradine/ticker-board/actions/workflows/tests.yaml)
+
 Displays information on the adafruit led matrix display.  This project works by stitching together other images into a long ticker which is then displayed using hzeller's rpi-rgb-led-matrix repo.
 
 -- ONLY RUN THIS ON A SECURE NETWORK --
