@@ -2,22 +2,20 @@ url="https://"
 url=$url"markets."
 url=$url"business"
 url=$url"insider"
-url=$url".com/currencies/$1"
+url=$url".com/currencies/$1-usd"
 
 unitSign="$"
 convertUSD2CAD="true"
+title=$1
+image=""
 
-if [ "$1" = "btc-usd" ]; then
-	title="BTC"
+if [ "$1" = "btc" ]; then
 	image="<image:images/finance/32px/btc.gif>"
-elif [ "$1" = "eth-usd" ]; then
-	title="ETH"
+elif [ "$1" = "eth" ]; then
 	image="<image:images/finance/32px/eth.gif>"
-elif [ "$1" = "xrp-usd" ]; then
-	title="XRP"
+elif [ "$1" = "xrp" ]; then
 	image="<image:images/finance/32px/xrp.gif>"
-elif [ "$1" = "xlm-usd" ]; then
-	title="XLM"
+elif [ "$1" = "xlm" ]; then
 	image="<image:images/finance/32px/xlm.gif>"
 fi
 

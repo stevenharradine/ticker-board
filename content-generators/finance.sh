@@ -72,7 +72,7 @@ for i in "${!cryptos[@]}"; do
 	crypto=${cryptos[$i]}
 
 	if [ ${cryptosEnabled[$i]} == "true" ]; then
-		source content-generators/finance/scrapers/crypto.sh "$crypto"-usd
+		source content-generators/finance/scrapers/crypto.sh "$crypto"
 	fi
 done
 
