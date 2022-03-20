@@ -26,6 +26,7 @@ fi
 if [ "$1" = "fund" ] || [ "$1" = "stock" ]; then
 	title=$2
 	unitSign="$"
+	image="<image:images/finance/32px/$2.gif>"
 
 	if [ "$3" = "ca" ]; then
 		url=$url"?countryCode=CA"
