@@ -7,17 +7,7 @@ url=$url".com/currencies/$1-usd"
 unitSign="$"
 convertUSD2CAD="true"
 title=$1
-image=""
-
-if [ "$1" = "btc" ]; then
-	image="<image:images/finance/32px/btc.gif>"
-elif [ "$1" = "eth" ]; then
-	image="<image:images/finance/32px/eth.gif>"
-elif [ "$1" = "xrp" ]; then
-	image="<image:images/finance/32px/xrp.gif>"
-elif [ "$1" = "xlm" ]; then
-	image="<image:images/finance/32px/xlm.gif>"
-fi
+image="<image:images/finance/32px/$1.gif>"
 
 cache=`curl --silent $url`
 price=`echo "$cache" | grep "price-section__current-value" | grep -o "[0-9.]*" | tr -d '\n'`
